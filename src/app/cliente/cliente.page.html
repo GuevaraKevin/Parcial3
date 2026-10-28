@@ -1,0 +1,158 @@
+
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>UBER</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="contenedor">
+
+    <div class="encabezado">
+      <div>
+        <p class="subtitulo">Tu próximo viaje comienza aquí</p>
+        <h1>Hola, {{ usuario?.name }}</h1>
+      </div>
+
+      <ion-button
+        fill="outline"
+        color="dark"
+        (click)="cerrarSesion()">
+        Salir
+      </ion-button>
+    </div>
+
+    <div class="distribucion">
+
+      <section class="panel">
+        <h2>¿A dónde vamos?</h2>
+
+        <p class="ayuda">
+          Selecciona el origen y destino tocando el mapa.
+        </p>
+
+        <div class="modos">
+          <ion-button
+            [fill]="modo === 'origen' ? 'solid' : 'outline'"
+            color="dark"
+            (click)="cambiarModo('origen')">
+            1. Origen
+          </ion-button>
+
+          <ion-button
+            [fill]="modo === 'destino' ? 'solid' : 'outline'"
+            color="dark"
+            (click)="cambiarModo('destino')">
+            2. Destino
+          </ion-button>
+        </div>
+
+        <ion-button
+          expand="block"
+          fill="outline"
+          color="dark"
+          (click)="usarMiUbicacion()">
+          Usar mi ubicación
+        </ion-button>
+
+        <div class="campo">
+          <label>Dirección de recogida</label>
+          <ion-input
+            fill="outline"
+            placeholder="Selecciona el origen en el mapa"
+            [(ngModel)]="nombreOrigen">
+          </ion-input>
+        </div>
+
+        <div class="campo">
+          <label>Destino</label>
+          <ion-input
+            fill="outline"
+            placeholder="Selecciona el destino en el mapa"
+            [(ngModel)]="nombreDestino">
+          </ion-input>
+        </div>
+
+        <ion-button
+          expand="block"
+          color="dark"
+          [disabled]="!origen || !destino || cargando()"
+          (click)="calcularTarifa()">
+
+          @if (cargando()) {
+            <ion-spinner name="crescent"></ion-spinner>
+          } @else {
+            Calcular precio
+          }
+        </ion-button>
+
+        @if (estimacion(); as e) {
+          <div class="resultado">
+            <p>Precio estimado del viaje</p>
+
+            <h2>
+              {{ e.estimated_fare | currency:'COP':'symbol-narrow':'1.0-0' }}
+            </h2>
+
+            <div class="detalles">
+              <span>{{ e.distance_km }} km estimados</span>
+              <span>{{ e.duration_min }} min estimados</span>
+            </div>
+
+            <ion-button
+              expand="block"
+              color="dark"
+              [disabled]="solicitando() || viajeActivo()?.has_active"
+              (click)="solicitarViaje()">
+
+              @if (solicitando()) {
+                <ion-spinner name="crescent"></ion-spinner>
+              } @else {
+                Confirmar viaje
+              }
+            </ion-button>
+          </div>
+        }
+
+        @if (viajeActivo()?.has_active) {
+          <div class="viaje-activo">
+            <h3>Viaje activo</h3>
+            <p>
+              Estado:
+              {{ viajeActivo()?.data?.status || viajeActivo()?.type || 'Pendiente' }}
+            </p>
+            <ion-button
+              expand="block"
+              fill="outline"
+              color="dark"
+              (click)="consultarViaje()">
+              Actualizar estado
+            </ion-button>
+          </div>
+        }
+
+        @if (mensaje()) {
+          <div class="mensaje">{{ mensaje() }}</div>
+        }
+
+      </section>
+
+      <section class="zona-mapa">
+        <div class="mapa-encabezado">
+          <strong>Mapa de tu viaje</strong>
+          <span>
+            {{ modo === 'origen' ? 'Seleccionando origen' : 'Seleccionando destino' }}
+          </span>
+        </div>
+
+        <div #mapa class="mapa"></div>
+
+        <div class="mapa-pie">
+          <span>● Origen</span>
+          <span class="destino-leyenda">● Destino</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,199 @@
+
+ion-content {
+  --background: #f4f5f7;
+  --color: #111;
+}
+
+.contenedor {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  gap: 12px;
+}
+
+.subtitulo {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 5px;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: 800;
+  color: #111;
+  margin: 0;
+}
+
+h2 {
+  color: #111;
+  font-weight: 750;
+}
+
+.distribucion {
+  display: grid;
+  grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.panel,
+.zona-mapa {
+  background: white;
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+}
+
+.panel h2 {
+  margin-top: 0;
+}
+
+.ayuda {
+  font-size: 14px;
+  color: #777;
+  line-height: 1.5;
+}
+
+.modos {
+  display: flex;
+  gap: 8px;
+  margin: 20px 0;
+
+  ion-button {
+    flex: 1;
+    min-width: 0;
+    text-transform: none;
+  }
+}
+
+.campo {
+  margin: 18px 0;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  ion-input {
+    --color: #111;
+    --placeholder-color: #888;
+    --background: #fff;
+  }
+}
+
+ion-button {
+  --border-radius: 10px;
+  --color: #fff;
+  text-transform: none;
+  font-weight: 600;
+}
+
+ion-button[fill="outline"] {
+  --color: #111;
+}
+
+.resultado {
+  margin-top: 24px;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+
+  p {
+    color: #666;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-size: 34px;
+    margin-bottom: 15px;
+  }
+}
+
+.detalles {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #555;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.mapa-encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 15px;
+
+  span {
+    color: #777;
+    font-size: 12px;
+  }
+}
+
+.mapa {
+  width: 100%;
+  height: 570px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #e5e7eb;
+}
+
+.mapa-pie {
+  padding-top: 15px;
+  display: flex;
+  gap: 20px;
+  font-size: 13px;
+  color: #111;
+}
+
+.destino-leyenda {
+  color: #16a34a;
+}
+
+.viaje-activo {
+  background: #f1f5f9;
+  padding: 16px;
+  border-radius: 12px;
+  margin-top: 20px;
+
+  h3 {
+    margin-top: 0;
+  }
+}
+
+.mensaje {
+  margin-top: 16px;
+  background: #f1f5f9;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+@media (max-width: 850px) {
+  .distribucion {
+    grid-template-columns: 1fr;
+  }
+
+  .contenedor {
+    padding: 14px;
+  }
+
+  .mapa {
+    height: 380px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+}

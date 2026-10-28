@@ -1,0 +1,57 @@
+
+<ion-content class="login-page">
+  <div class="login-container">
+    <div class="login-card">
+
+      <div class="brand">UBER</div>
+
+      <h1>Bienvenido</h1>
+      <p>Inicia sesión para continuar</p>
+
+      <div class="formulario">
+
+        
+        <div class="campo">
+          <label>Correo electrónico</label>
+          <ion-input
+            fill="outline"
+            type="email"
+            placeholder="correo@ejemplo.com"
+            [(ngModel)]="correo">
+          </ion-input>
+        </div>
+
+        <div class="campo">
+          <label>Contraseña</label>
+          <ion-input
+            fill="outline"
+            type="password"
+            placeholder="Ingresa tu contraseña"
+            [(ngModel)]="clave">
+          </ion-input>
+        </div>
+
+
+        <ion-button
+          expand="block"
+          (click)="iniciarSesion()"
+          [disabled]="cargando || !correo || !clave">
+
+          @if (cargando) {
+            <ion-spinner name="crescent"></ion-spinner>
+          } @else {
+            <span>Iniciar sesión</span>
+          }
+
+        </ion-button>
+
+        @if (mensaje) {
+          <p class="mensaje">
+            {{ mensaje }}
+          </p>
+        }
+
+      </div>
+    </div>
+  </div>
+</ion-content>
